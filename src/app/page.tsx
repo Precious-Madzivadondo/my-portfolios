@@ -96,7 +96,7 @@ export default function Page() {
        
 
         <p className="font-medium text-zinc-200">
-          BSc in Computer Science
+          BSc in Computer Science & Infomatics
         </p>
         <p className="text-zinc-400">
           University of Johannesburg
