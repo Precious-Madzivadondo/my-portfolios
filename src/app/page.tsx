@@ -6,6 +6,9 @@ import { Button } from "./components/button/button";
 import { Card, CardContent } from "./components/card/card";
 import profile from "@/public/generated_KPYkyIB.png";
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
+
 
 import {
   Code,
@@ -17,6 +20,35 @@ import {
 // ================= Page =================
 
 export default function Page() {
+
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+
+  if (!formRef.current) return;
+
+  emailjs
+    .sendForm(
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      formRef.current,
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    )
+    .then(
+      (result) => {
+        console.log("Email sent:", result.text);
+        alert("Message sent successfully!");
+        formRef.current?.reset();
+      },
+      (error) => {
+        console.error("EmailJS error:", error.text || error);
+        alert("Email failed to send. Please check setup.");
+      }
+    );
+};
+
+
   return (
     <div className="flex">
       <SidePanel />
@@ -227,38 +259,48 @@ export default function Page() {
         <CardContent className="p-6">
           <h3 className="text-xl font-semibold mb-6">Send me a Message</h3>
 
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm mb-1">Full Name</label>
-              <input
-                type="text"
-                placeholder="Your full name"
-                className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500"
-              />
-            </div>
+         <form ref={formRef} onSubmit={sendEmail} className="space-y-4">
+  <div>
+    <label className="block text-sm mb-1">Full Name</label>
+    <input
+      type="text"
+      name="name"
+      required
+      placeholder="Your full name"
+      className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500"
+    />
+  </div>
 
-            <div>
-              <label className="block text-sm mb-1">Email Address</label>
-              <input
-                type="email"
-                placeholder="your.email@example.com"
-                className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500"
-              />
-            </div>
+  <div>
+    <label className="block text-sm mb-1">Email Address</label>
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="your.email@example.com"
+      className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500"
+    />
+  </div>
 
-            <div>
-              <label className="block text-sm mb-1">Message</label>
-              <textarea
-                placeholder="Write your message here..."
-                rows={4}
-                className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500"
-              />
-            </div>
+  <div>
+    <label className="block text-sm mb-1">Message</label>
+    <textarea
+      name="message"
+      required
+      placeholder="Write your message here..."
+      rows={4}
+      className="w-full rounded-xl bg-zinc-900 border border-zinc-800 px-4 py-2 text-zinc-100 focus:outline-none focus:border-indigo-500"
+    />
+  </div>
 
-            <Button className="w-full rounded-2xl bg-indigo-500 hover:bg-indigo-400 text-white">
-              Send Message
-            </Button>
-          </form>
+  <Button
+    type="submit"
+    className="w-full rounded-2xl bg-indigo-500 hover:bg-indigo-400 text-white"
+  >
+    Send Message
+  </Button>
+</form>
+
         </CardContent>
       </Card>
 
@@ -266,17 +308,27 @@ export default function Page() {
       <div>
         <h3 className="text-xl font-semibold mb-6">Or Connect With Me</h3>
 
-     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-  <a href="#" className="group">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+  {/* Email */}
+  <a
+    href="mailto:tmadziva@icloud.com"
+    className="group"
+  >
     <Card className="h-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] hover:border-purple-500">
       <CardContent className="flex items-center gap-3 p-6">
         <Mail className="text-purple-400" />
-        <span className="font-medium">Email</span>
+        <span className="font-medium">tmadziva@icloud.com</span>
       </CardContent>
     </Card>
   </a>
 
-  <a href="#" className="group">
+  {/* GitHub */}
+  <a
+    href="https://github.com/Precious-Madzivadondo"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group"
+  >
     <Card className="h-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] hover:border-purple-500">
       <CardContent className="flex items-center gap-3 p-6">
         <Github className="text-purple-400" />
@@ -285,7 +337,13 @@ export default function Page() {
     </Card>
   </a>
 
-  <a href="#" className="group">
+  {/* LinkedIn */}
+  <a
+    href="https://www.linkedin.com/in/precious-madzivadondo-125784216/"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="group"
+  >
     <Card className="h-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] hover:border-purple-500">
       <CardContent className="flex items-center gap-3 p-6">
         <Linkedin className="text-purple-400" />
@@ -293,19 +351,13 @@ export default function Page() {
       </CardContent>
     </Card>
   </a>
+</div>
 
-         
-        </div>
         
       </div>
-      <div className="flex justify-center">
-  <Button
-    variant="outline"
-    className="w-full flex gap-2 border-indigo-500 text-indigo-400 hover:bg-indigo-500/10"
-  >
-    Download CV
-  </Button>
-</div>
+
+
+
 
     </div>
   </div>
@@ -353,9 +405,16 @@ function SidePanel() {
       </nav>
 
       <div className="mt-auto pt-6">
-        <Button className="w-full rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white">
-          Download CV
-        </Button>
+      <a
+  href="/Precious_Madzivadondo.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <Button className="w-full rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white">
+    Download CV
+  </Button>
+</a>
+
       </div>
     </aside>
   );
