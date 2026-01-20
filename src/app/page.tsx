@@ -27,7 +27,11 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
   e.preventDefault();
 
   if (!formRef.current) return;
-
+  console.log("ENV CHECK", {
+    service: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
+    template: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID,
+    key: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+  });
   emailjs
     .sendForm(
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
