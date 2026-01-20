@@ -1,13 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Code2,GraduationCap,Award } from "lucide-react";
+import { Github, Linkedin, Mail, Code2,GraduationCap,Award, FolderGit2, } from "lucide-react";
 import { Button } from "./components/button/button";
 import { Card, CardContent } from "./components/card/card";
 import profile from "@/public/generated_KPYkyIB.png";
 import Image from "next/image";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
+import { useEffect, useState } from "react";
+import React from "react";
+
+
 
 
 import {
@@ -108,11 +112,11 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
   </div>
 
   {/* Purple strip card with subtitle */}
-  <Card className="mb-10 max-w-4xl mx-auto">
-    <div className="flex">
-      <div className="w-1 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-l-xl" />
-      <CardContent className="pl-6 flex items-center">
-        <p className="text-zinc-400 text-center md:text-left leading-relaxed">
+   <Card className="mb-10">
+            <div className="flex">
+              <div className="w-1 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-l-xl" />
+              <CardContent className="pl-6">
+                <p className="text-zinc-400 max-w-3xl leading-relaxed">
           Formal Education | Bootcamps | Hackathons | Lifelong Learning | Self-Study
         </p>
       </CardContent>
@@ -151,11 +155,11 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
           <div className="max-w-6xl mx-auto px-6 py-20">
             <h2 className="text-3xl font-semibold mb-3">Technical Skills</h2>
             
- <Card className="mb-10 max-w-4xl mx-auto">
-    <div className="flex">
-      <div className="w-1 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-l-xl" />
-      <CardContent className="pl-6 flex items-center">
-        <p className="text-zinc-400 text-center md:text-left leading-relaxed">
+ <Card className="mb-10">
+            <div className="flex">
+              <div className="w-1 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-l-xl" />
+              <CardContent className="pl-6">
+                <p className="text-zinc-400 max-w-3xl leading-relaxed">
          Technical skills overview, continuously growing with modern web technologies.
         </p>
       </CardContent>
@@ -227,16 +231,59 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
             </div>
           </Card>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <ProjectCard
-              title="Medication Tapering App"
-              description="PWA built with Next.js and Flask for medication scheduling and optimisation."
-            />
-            <ProjectCard
-              title="Group Dashboard"
-              description="Next.js + Django dashboard with JWT auth and role-based access control."
-            />
-          </div>
+        <div className="grid md:grid-cols-2 gap-8">
+  {/* Existing Apps */}
+  <ProjectCard
+    title="Medication Tapering App"
+    description="PWA built with Next.js and Flask for medication scheduling and optimisation."
+    href="#"
+    tech="Next.js • Flask • PWA"
+  />
+
+  <ProjectCard
+    title="Group Dashboard"
+    description="Next.js + Django dashboard with JWT auth and role-based access control."
+    href="#"
+    tech="Next.js • Django • JWT"
+  />
+
+  {/* WordPress Websites */}
+  <ProjectCard
+    title="Blue Guardian Consulting"
+    description="Professional business website built with WordPress, focused on corporate branding and conversions."
+    href="https://blueguardianconsult.com/"
+    tech="WordPress"
+  />
+
+  <ProjectCard
+    title="Slim Batha Psychology"
+    description="Psychology practice website with clean UX, service pages, and contact flows."
+    href="https://slimbathapsychology.co.za/"
+    tech="WordPress"
+  />
+
+  <ProjectCard
+    title="True Yam Plumber"
+    description="Local service business website optimised for mobile users and lead generation."
+    href="https://trueyamplumber.co.za/"
+    tech="WordPress"
+  />
+
+  <ProjectCard
+    title="Benno Guenther"
+    description="Personal brand and portfolio website with a minimalist layout."
+    href="https://bennoguenther.com/"
+    tech="WordPress"
+  />
+
+  <ProjectCard
+    title="Private Pilates by IM"
+    description="Fitness and pilates studio website with booking-focused design."
+    href="https://privatepilatesbyim.de/"
+    tech="WordPress"
+  />
+</div>
+
         </section>
 
       {/* Contact */}
@@ -244,11 +291,11 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
   <div className="max-w-6xl mx-auto px-6 py-20">
     <h2 className="text-3xl font-semibold mb-6">Get in Touch</h2>
 
-    <Card className="mb-10 max-w-4xl mx-auto">
-      <div className="flex">
-        <div className="w-1 bg-linear-to-b from-indigo-500 to-purple-600 rounded-l-xl" />
-        <CardContent className="pl-6 flex items-center">
-          <p className="text-zinc-400 text-center md:text-left leading-relaxed">
+    <Card className="mb-10">
+            <div className="flex">
+              <div className="w-1 bg-gradient-to-b from-indigo-500 to-purple-600 rounded-l-xl" />
+              <CardContent className="pl-6">
+                <p className="text-zinc-400 max-w-3xl leading-relaxed">
             Looking for a Software Engineer? I’d be excited to contribute to your team.
             Feel free to reach out — I’m available for assessments, interviews, and opportunities.
           </p>
@@ -380,49 +427,147 @@ const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
 // ================= Sidebar =================
 
 function SidePanel() {
-  return (
-    <aside className="fixed left-0 top-0 h-screen w-80 bg-linear-to-b from-zinc-950 to-zinc-900 border-r border-zinc-800 px-6 py-8 hidden md:flex flex-col">
-      <div className="flex flex-col items-center text-center">
-        <div className="h-28 w-28 rounded-2xl bg-linear-to-br from-indigo-500 to-purple-600 p-1 shadow-lg">
-          <div className="h-full w-full rounded-xl overflow-hidden bg-zinc-900">
-            <Image src={profile} alt="Precious Madzivadondo" />
-          </div>
-        </div>
+  const [active, setActive] = React.useState("education");
 
-        <h2 className="text-lg font-semibold mt-4">Precious Madzivadondo</h2>
-        <span className="mt-1 text-xs px-3 py-1 rounded-full bg-zinc-800 text-zinc-300">
+  React.useEffect(() => {
+    const sections = ["education", "skills", "portfolio", "contact"];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    );
+
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const navItems = [
+    { id: "education", label: "Education", icon: GraduationCap },
+    { id: "skills", label: "Skills", icon: Code2 },
+    { id: "portfolio", label: "Portfolio", icon: FolderGit2 },
+    { id: "contact", label: "Contact", icon: Mail },
+  ];
+
+  return (
+    <aside
+      className="
+        fixed left-0 top-0 h-screen w-80
+        bg-gradient-to-b from-zinc-950/90 via-zinc-900/95 to-zinc-950
+        backdrop-blur-xl
+        border-r border-zinc-800
+        px-6 py-8
+        hidden md:flex flex-col
+      "
+    >
+      {/* Animated glow rail */}
+      <div className="absolute inset-y-0 left-0 w-[3px] bg-gradient-to-b from-indigo-500 via-purple-500 to-indigo-500 opacity-70" />
+
+      {/* Profile */}
+      <div className="relative flex flex-col items-center text-center">
+        <motion.div whileHover={{ scale: 1.05 }} className="relative">
+          <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 blur-xl opacity-70" />
+          <div className="relative h-28 w-28 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 p-[2px] shadow-2xl">
+            <div className="h-full w-full rounded-xl overflow-hidden bg-zinc-900">
+              <Image src={profile} alt="Precious Madzivadondo" />
+            </div>
+          </div>
+        </motion.div>
+
+        <h2 className="mt-5 text-lg font-semibold tracking-tight">
+          Precious Madzivadondo
+        </h2>
+
+        <span className="mt-2 text-xs px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400">
           Software Engineer
         </span>
+
+        <div className="mt-3 flex items-center gap-2 text-xs text-emerald-400">
+          <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          Available for work
+        </div>
       </div>
 
-      <nav className="mt-10 flex flex-col gap-2">
-        {["Education", "Skills", "Portfolio", "Contact"].map((item) => (
-          <a
-            key={item}
-            href={`#${item.toLowerCase()}`}
-            className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-zinc-300 hover:bg-zinc-800 transition"
-          >
-            <span className="h-2 w-2 rounded-full bg-indigo-400" />
-            {item}
-          </a>
-        ))}
+      {/* Divider */}
+      <div className="my-10 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
+
+      {/* Navigation */}
+      <nav className="relative flex flex-col gap-2">
+        {navItems.map(({ id, label, icon: Icon }) => {
+          const isActive = active === id;
+
+          return (
+            <motion.a
+              key={id}
+              href={`#${id}`}
+              whileHover={{ x: 6 }}
+              className={`
+                relative flex items-center gap-4
+                px-4 py-3 rounded-xl
+                text-sm font-medium transition-all
+                ${
+                  isActive
+                    ? "text-white"
+                    : "text-zinc-400 hover:text-white"
+                }
+              `}
+            >
+              {isActive && (
+                <motion.span
+                  layoutId="sidebar-active"
+                  className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500/20 to-purple-500/20 shadow-lg"
+                />
+              )}
+
+              <span className="relative z-10 flex items-center gap-4">
+                <Icon
+                  size={18}
+                  className={
+                    isActive ? "text-indigo-400" : "text-zinc-500"
+                  }
+                />
+                {label}
+              </span>
+            </motion.a>
+          );
+        })}
       </nav>
 
-      <div className="mt-auto pt-6">
-      <a
-  href="/Precious_Madzivadondo.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <Button className="w-full rounded-xl bg-indigo-500 hover:bg-indigo-400 text-white">
-    Download CV
-  </Button>
-</a>
+      {/* Footer CTA */}
+      <div className="mt-auto pt-10">
+        <a
+          href="/Precious_Madzivadondo.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Button className="
+            w-full rounded-xl
+            bg-gradient-to-r from-indigo-500 to-purple-600
+            hover:from-indigo-400 hover:to-purple-500
+            text-white shadow-2xl
+          ">
+            Download CV
+          </Button>
+        </a>
 
+        <p className="mt-4 text-center text-xs text-zinc-500">
+          © {new Date().getFullYear()}
+        </p>
       </div>
     </aside>
   );
 }
+
+
 
 // ================= Skill Components =================
 
@@ -511,25 +656,44 @@ function SkillItem({
 function ProjectCard({
   title,
   description,
+  href,
+  tech,
 }: {
   title: string;
   description: string;
+  href: string;
+  tech?: string;
 }) {
   return (
-    <Card>
-      <CardContent>
+    <Card className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(168,85,247,0.4)] hover:border-purple-500/60">
+      <CardContent className="flex flex-col h-full">
         <h3 className="text-xl font-semibold mb-2">{title}</h3>
-        <p className="text-zinc-400 mb-4">{description}</p>
-        <Button
-          variant="outline"
-          className="rounded-xl border-indigo-500 text-indigo-400 hover:bg-indigo-500/10"
+
+        {tech && (
+          <span className="mb-3 inline-block w-fit text-xs px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400">
+            {tech}
+          </span>
+        )}
+
+        <p className="text-zinc-400 mb-6 flex-1">{description}</p>
+
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          View Project
-        </Button>
+          <Button
+            variant="outline"
+            className="w-full rounded-xl border-indigo-500 text-indigo-400 hover:bg-indigo-500/10"
+          >
+            View Website
+          </Button>
+        </a>
       </CardContent>
     </Card>
   );
 }
+
 
 function SocialLink({
   icon,
