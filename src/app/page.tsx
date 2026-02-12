@@ -545,7 +545,7 @@ function SidePanel() {
       {/* Footer CTA */}
       <div className="mt-auto pt-10">
         <a
-          href="/Precious_Madzivadondo.pdf"
+          href="/Precious_Madzivadondo!.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
